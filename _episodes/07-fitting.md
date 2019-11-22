@@ -1,10 +1,9 @@
 ---
-title: "Introduction"
+title: "Fitting"
 teaching: 0
 exercises: 0
 questions:
-- "What is uproot?"
-- "Why should I use it?"
+- "How can I fit a common function to a histogram?"
 objectives:
 - "First objective. (FIXME)"
 keypoints:

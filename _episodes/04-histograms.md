@@ -1,10 +1,10 @@
 ---
-title: "Introduction"
+title: "Histogramming Basics"
 teaching: 0
 exercises: 0
 questions:
-- "What is uproot?"
-- "Why should I use it?"
+- "How do I make a histogram in Python (without ROOT)?"
+- "How can I change histogram settings?"
 objectives:
 - "First objective. (FIXME)"
 keypoints:

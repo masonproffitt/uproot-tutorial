@@ -1,10 +1,9 @@
 ---
-title: "Introduction"
+title: "Getting Some Physics-Relevant Information"
 teaching: 0
 exercises: 0
 questions:
-- "What is uproot?"
-- "Why should I use it?"
+- "How can I use columnar analysis to do something useful for physics?"
 objectives:
 - "First objective. (FIXME)"
 keypoints:

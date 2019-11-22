@@ -1,10 +1,10 @@
 ---
-title: "Introduction"
+title: "Opening files"
 teaching: 0
 exercises: 0
 questions:
-- "What is uproot?"
-- "Why should I use it?"
+- "How do I open a ROOT file with uproot?"
+- "How can I tell what's in a ROOT file?"
 objectives:
 - "First objective. (FIXME)"
 keypoints:
