@@ -5,7 +5,7 @@ exercises: 0
 questions:
 - "How do I access a TTree?"
 - "How can I tell what branches are in a TTree?"
-- "How do I read the data in a TTree?"
+- "How do I read the data from a TTree?"
 objectives:
 - "First objective. (FIXME)"
 keypoints:
