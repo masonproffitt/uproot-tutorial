@@ -3,7 +3,7 @@ title: "Introduction"
 teaching: 0
 exercises: 0
 questions:
-- "What is <code>uproot</code>?"
+- "What is uproot?"
 - "Why should I use it?"
 objectives:
 - "First objective. (FIXME)"
