@@ -1,5 +1,5 @@
 ---
-title: "Histogramming Basics"
+title: "Histograms"
 teaching: 0
 exercises: 0
 questions:

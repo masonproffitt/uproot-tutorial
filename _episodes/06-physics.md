@@ -1,5 +1,5 @@
 ---
-title: "Getting Some Physics-Relevant Information"
+title: "Getting Physics-Relevant Information"
 teaching: 0
 exercises: 0
 questions:
