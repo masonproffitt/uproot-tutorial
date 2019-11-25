@@ -17,12 +17,19 @@ import matplotlib.pyplot as plt
 {: .language-python}
 
 ~~~
-Muon_pt = branches['Muon_pt']
+nMuon = branches['nMuon']
 ~~~
 {: .language-python}
 
 ~~~
-plt.hist(Muon_pt);
+plt.hist(nMuon);
+~~~
+{: .language-python}
+
+![nMuon_hist]({{ page.root }}/fig/nMuon_hist.png)
+
+~~~
+plt.hist(nMuon);
 ~~~
 {: .language-python}
 
