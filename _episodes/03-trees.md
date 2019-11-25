@@ -49,6 +49,8 @@ branches = tree.arrays(namedecode='utf-8')
 ~~~
 {: .language-python}
 
+> ## Why the 'utf-8'?
+>
 >~~~
 >tree.arrays()['nMuon']
 >~~~
