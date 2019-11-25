@@ -10,6 +10,24 @@ objectives:
 keypoints:
 - "First key point. (FIXME)"
 ---
-FIXME
+
+~~~
+import matplotlib.pyplot as plt
+~~~
+{: .language-python}
+
+~~~
+Muon_pt = branches['Muon_pt']
+~~~
+{: .language-python}
+
+~~~
+plt.hist(Muon_pt);
+~~~
+{: .language-python}
+~~~
+![nMuon_hist]({{ page.root }}/fig/nMuon_hist.png)
+~~~
+{: .output}
 
 {% include links.md %}
