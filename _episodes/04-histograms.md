@@ -25,9 +25,7 @@ Muon_pt = branches['Muon_pt']
 plt.hist(Muon_pt);
 ~~~
 {: .language-python}
-~~~
+
 ![nMuon_hist]({{ page.root }}/fig/nMuon_hist.png)
-~~~
-{: .output}
 
 {% include links.md %}
