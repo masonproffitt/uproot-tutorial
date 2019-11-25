@@ -64,12 +64,30 @@ $color-testimonial: #fc8dc1 !default;
   border-radius: 0 4px 4px 0;
 }
 
+.error::before,
+.output::before,
+.source::before,
+.bash::before, .language-bash::before,
+.make::before, .language-make::before,
+.matlab::before, .language-matlab::before,
+.python::before, .language-python::before,
+.r::before, .language-r::before,
+.sql::before, .language-sql::before {
+  background-color: #f2eff6;
+  display: block;
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
 .error::before  { background-color: #ffebe6; content: "Error"; }
 .output::before { background-color: #efefef; content: "Output"; }
 .source::before { content: "Code"; }
 .bash::before, .language-bash::before { content: "Bash"; }
 .make::before, .language-make::before { content: "Make"; }
+.matlab::before, .language-matlab::before { content: "Matlab"; }
 .python::before, .language-python::before { content: "Python"; }
+.r::before, .language-r::before { content: "R"; }
+.sql::before, .language-sql::before { content: "SQL"; }
 
 //----------------------------------------
 // Specialized blockquote environments for learning objectives, callouts, etc.
