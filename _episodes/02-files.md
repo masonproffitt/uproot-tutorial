@@ -60,4 +60,31 @@ file.keys()
 ~~~
 {: .output}
 
+~~~
+file.classnames()
+~~~
+{: .language-python}
+~~~
+[(b'Events;1', 'TTree')]
+~~~
+{: .output}
+
+~~~
+file.get('Events')
+~~~
+{: .language-python}
+~~~
+<TTree b'Events' at 0x(hexadecimal number)>
+~~~
+{: .output}
+
+~~~
+file['Events']
+~~~
+{: .language-python}
+~~~
+<TTree b'Events' at 0x(hexadecimal number)>
+~~~
+{: .output}
+
 {% include links.md %}
