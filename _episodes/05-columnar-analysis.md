@@ -87,7 +87,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![single_muon_pt_hist]({{ page.root }}/fig/single_muon_pt_hist.png)
+![single_Muon_pt_hist]({{ page.root }}/fig/single_Muon_pt_hist.png)
 
 ~~~
 eta_mask = abs(branches['Muon_eta']) < 2
@@ -204,7 +204,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Muon_pt_hist_eta_split_1]({{ page.root }}/fig/Muon_pt_hist_eta_split_1.png)
+![single_Muon_pt_hist_eta_split_1]({{ page.root }}/fig/single_Muon_pt_hist_eta_split_1.png)
 
 ~~~
 plt.hist([branches['Muon_pt'][single_muon_mask & eta_mask].flatten(),
@@ -218,7 +218,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Muon_pt_hist_eta_split_2]({{ page.root }}/fig/Muon_pt_hist_eta_split_2.png)
+![single_Muon_pt_hist_eta_split_2]({{ page.root }}/fig/single_Muon_pt_hist_eta_split_2.png)
 
 ~~~
 plt.hist((branches['Muon_pt'][single_muon_mask & eta_mask].flatten(),
@@ -233,7 +233,7 @@ plt.show()
 ~~~
 {: .language-python}
 
-![Muon_pt_hist_eta_split_3]({{ page.root }}/fig/Muon_pt_hist_eta_split_3.png)
+![single_Muon_pt_hist_eta_split_3]({{ page.root }}/fig/single_Muon_pt_hist_eta_split_3.png)
 
 > ## Columnar vs. row-based analysis
 >
