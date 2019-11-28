@@ -7,9 +7,9 @@ questions:
 - "What is uproot?"
 - "Why should I use it?"
 objectives:
-- "Explain some advantages of Python and uproot"
+- "Explain some advantages of Python and uproot."
 keypoints:
-- "uproot is a fast and lightweight Python package for reading and writing ROOT files"
+- "uproot is a fast and lightweight Python package for reading and writing ROOT files."
 ---
 
 # Python and HEP
