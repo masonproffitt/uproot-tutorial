@@ -87,6 +87,8 @@ plt.show()
 ~~~
 {: .language-python}
 
+![single_muon_pt_hist]({{ page.root }}/fig/single_muon_pt_hist.png)
+
 ~~~
 eta_mask = abs(branches['Muon_eta']) < 2
 ~~~
@@ -157,37 +159,40 @@ single_muon_mask | eta_mask
 ~~~
 {: .output}
 
-~~~
-False == False & False
-~~~
-{: .language-python}
-~~~
-True
-~~~
-{: .output}
-
-~~~
-False == (False & False)
-~~~
-{: .language-python}
-~~~
-True
-~~~
-{: .output}
-
-~~~
-(False == False) & False
-~~~
-{: .language-python}
-~~~
-False
-~~~
-{: .output}
-
-~~~
-(branches['nMuon'] == 1) & (abs(branches['Muon_eta']) < 2)
-~~~
-{: .language-python}
+> ## Warning about combining selections
+>
+> ~~~
+> False == False & False
+> ~~~
+> {: .language-python}
+> ~~~
+> True
+> ~~~
+> {: .output}
+>
+> ~~~
+> False == (False & False)
+> ~~~
+> {: .language-python}
+> ~~~
+> True
+> ~~~
+> {: .output}
+>
+> ~~~
+> (False == False) & False
+> ~~~
+> {: .language-python}
+> ~~~
+> False
+> ~~~
+> {: .output}
+>
+> ~~~
+> (branches['nMuon'] == 1) & (abs(branches['Muon_eta']) < 2)
+> ~~~
+> {: .language-python}
+{: .callout}
 
 ~~~
 plt.hist((branches['Muon_pt'][single_muon_mask & eta_mask].flatten(),
@@ -230,39 +235,42 @@ plt.show()
 
 ![Muon_pt_hist_eta_split_3]({{ page.root }}/fig/Muon_pt_hist_eta_split_3.png)
 
-~~~
-%%time
-
-eta_count = 0
-
-for event in branches['Muon_eta']:
-    for eta in event:
-        if eta < 2:
-            eta_count += 1
-            
-eta_count
-~~~
-{: .language-python}
-~~~
-CPU times: user 1.31 s, sys: 3.27 ms, total: 1.32 s
-Wall time: 1.32 s
-
-219321
-~~~
-{: .output}
-
-~~~
-%%time
-
-(branches['Muon_eta'] < 2).flatten().sum()
-~~~
-{: .language-python}
-~~~
-CPU times: user 4.65 ms, sys: 3.24 ms, total: 7.89 ms
-Wall time: 6.41 ms
-
-219321
-~~~
-{: .output}
+> ## Columnar vs. row-based analysis
+>
+> ~~~
+> %%time
+>
+> eta_count = 0
+>
+> for event in branches['Muon_eta']:
+>     for eta in event:
+>         if eta < 2:
+>             eta_count += 1
+>
+> eta_count
+> ~~~
+> {: .language-python}
+> ~~~
+> CPU times: user 1.31 s, sys: 3.27 ms, total: 1.32 s
+> Wall time: 1.32 s
+>
+> 219321
+> ~~~
+> {: .output}
+>
+> ~~~
+> %%time
+>
+> (branches['Muon_eta'] < 2).flatten().sum()
+> ~~~
+> {: .language-python}
+> ~~~
+> CPU times: user 4.65 ms, sys: 3.24 ms, total: 7.89 ms
+> Wall time: 6.41 ms
+>
+> 219321
+> ~~~
+> {: .output}
+{: .callout}
 
 {% include links.md %}
