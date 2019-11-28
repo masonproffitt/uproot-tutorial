@@ -22,7 +22,8 @@ Python is also generally considered easier to learn than C++.
 # uproot
 
 uproot is a Python module that can read and write files in the ROOT format.
-It isn't the only way to read/write ROOT files in Python; there are other packages that allow you to do this.
+It's part of the Scikit-HEP project, a collection of Python tools for HEP data analysis.
+uproot isn't the only way to read/write ROOT files in Python; there are other packages that allow you to do this.
 However, there are some signficant advantages of uproot.
 We'll go through a few here.
 
