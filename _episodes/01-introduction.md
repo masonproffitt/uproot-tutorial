@@ -60,31 +60,35 @@ For example, different events will have different numbers of jets, and different
 Packages like numpy are only designed to work with rectangular arrays, where each dimension has a fixed length throughout the entire array.
 uproot uses a package called `awkward` to deal with non-rectangular (awkward) arrays so that they can be manipulated in ways almost identical to standard rectangular numpy arrays.
 The most important class in `awkward` is called `JaggedArray`.
-The names comes from the idea that if you have a 2D array in which there's a different number of entries in each row and you line rows up by their first element, then the right edge of the array will be "jagged" as opposed to straight:
 
-Rectangular array:
-
-~~~
-[[0, 1],
- [2, 3],
- [4, 5],
- [6, 7],
- [8, 9]
-]
-~~~
-{: .source}
-
-Jagged array:
-
-~~~
-[[0, 1],
- [2, 3, 4],
- [5],
- [6, 7],
- [8, 9],
-]
-~~~
-{: .source}
+> ## Jagged vs. rectangular arrays
+>
+> The name `JaggedArray` comes from the idea that if you have a 2D array in which there's a different number of entries in each row and you line rows up by their first element, then the right edge of the array will be "jagged" as opposed to straight:
+> 
+> Rectangular array:
+> 
+> ~~~
+> [[0, 1],
+>  [2, 3],
+>  [4, 5],
+>  [6, 7],
+>  [8, 9]
+> ]
+> ~~~
+> {: .source}
+> 
+> Jagged array:
+> 
+> ~~~
+> [[0, 1],
+>  [2, 3, 4],
+>  [5],
+>  [6, 7],
+>  [8, 9],
+> ]
+> ~~~
+> {: .source}
+{: .callout}
 
 Other Python packages for reading ROOT files usually do not support jagged arrays, which means that you cannot do operations on multiple events at once if you have jagged data.
 But uproot can, and this is generally much faster than operating on one event at a time. We'll come back to this topic in the "Columnar Analysis" section.
