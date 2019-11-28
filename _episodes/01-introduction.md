@@ -41,16 +41,16 @@ It's included in the Anaconda distribution by default, and in general most peopl
 `awkward` and `uproot-methods` are also part of the Scikit-HEP project and can be thought of as effectively just subcomponents of `uproot`.
 And finally, `cachetools` is a tiny package with some caching utilities.
 
-Most importantly, `uproot` does not require any part of the `ROOT` software, which is quite large and can be non-trivial to install properly.
+Most importantly, `uproot` does not require any part of the ROOT software, which is quite large and can be non-trivial to install properly.
 
 ## Speed
 
 `uproot` was designed for efficient reading of files.
 It uses `numpy` for operations on data, which calls compiled vectorized functions to perform very fast calculations on arrays.
 
-When you import a Python package that uses `ROOT`, there can be a delay of several seconds while all of the required libraries are loaded.
+When you import a Python package that uses ROOT, there can be a delay of several seconds while all of the required libraries are loaded.
 This is required every time you restart the Python interpreter or run a script.
-By virtue of not using `ROOT` itself, `uproot` doesn't have this issue.
+By virtue of not using ROOT itself, `uproot` doesn't have this issue.
 
 ## Jagged arrays
 
