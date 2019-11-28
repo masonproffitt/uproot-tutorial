@@ -129,6 +129,7 @@ plt.show()
 ![Muon_pt_hist_3]({{ page.root }}/fig/Muon_pt_hist_3.png)
 
 ~~~
+import numpy as np
 plt.hist(branches['Muon_pt'].flatten(), bins=np.logspace(np.log10(1), np.log10(100), 100));
 plt.xlabel('Muon $p_{\mathrm{T}}$ [MeV]')
 plt.xscale('log')
