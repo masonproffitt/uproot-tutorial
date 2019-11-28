@@ -101,6 +101,7 @@ plt.show()
 
 ~~~
 plt.hist((branches['Muon_pt'].flatten(), bins=100, range=(0, 100));
+plt.show()
 ~~~
 {: .language-python}
 
