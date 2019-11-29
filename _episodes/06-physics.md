@@ -10,6 +10,10 @@ keypoints:
 - ""
 ---
 
+Okay, we're finally ready to look for resonances in dimuon events.
+
+We need a mask that selects event with exactly two muons.
+
 ~~~
 two_muons_mask = branches['nMuon'] == 2
 
@@ -26,6 +30,8 @@ two_muons_p4 = uproot_methods.TLorentzVectorArray.from_ptetaphim(two_muons_table
 two_muons_p4
 ~~~
 {: .language-python}
+
+~~~
 <JaggedArrayMethods [[TLorentzVector(10.764, 1.0668, -0.034273, 0.10566) TLorentzVector(15.737, -0.56379, 2.5426, 0.10566)] [TLorentzVector(10.538, -0.42778, -0.27479, 0.10566) TLorentzVector(16.327, 0.34923, 2.5398, 0.10566)] [TLorentzVector(57.607, -0.53209, -0.071798, 0.10566) TLorentzVector(53.045, -1.0042, 3.0895, 0.10566)] ... [TLorentzVector(9.5837, -1.5126, -0.22681, 0.10566) TLorentzVector(3.3317, 2.1995, -2.7097, 0.10566)] [TLorentzVector(46.362, -1.9284, -2.3773, 0.10566) TLorentzVector(43.904, -2.2734, 0.86049, 0.10566)] [TLorentzVector(3.3099, 1.6359, 0.87988, 0.10566) TLorentzVector(15.68, 0.47661, -1.7525, 0.10566)]] at 0x7f180ddc0400>
 ~~~
 {: .output}
