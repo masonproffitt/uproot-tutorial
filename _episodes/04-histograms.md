@@ -145,6 +145,8 @@ plt.show()
 
 ![Muon_pt_hist_1]({{ page.root }}/fig/Muon_pt_hist_1.png)
 
+# Logarithmic scales
+
 Another important thing to know is how to set axes to a logarithmic scale.
 For the y-axis, this is as simple as adding a line with `plt.yscale('log')`:
 
