@@ -1,7 +1,7 @@
 ---
 title: "Getting Physics-Relevant Information"
 teaching: 0
-exercises: 0
+exercises: 10
 questions:
 - "How can I use columnar analysis to do something useful for physics?"
 objectives:
@@ -12,29 +12,46 @@ keypoints:
 
 Okay, we're finally ready to look for resonances in dimuon events.
 
-We need a mask that selects event with exactly two muons.
+We need a mask that selects events with exactly two muons:
 
 ~~~
 two_muons_mask = branches['nMuon'] == 2
+~~~
+{: .language-python}
 
+In order to avoid have to apply this selection to every branch individually,
+I'll create a table to apply the seelction on all branches at once:
+
+~~~
 two_muons_table = table[two_muons_mask]
+~~~
+{: .language-python}
 
+Another facet of uproot is `uproot-methods`, which is a helper package that contains useful classes that emulate important ROOT types like TLorentzVector (a four-vector).
+We can get the four-vector of all muons in the table by using `TLorentzVectorArray` and passing it the pT, eta, phi, and mass arrays:
+
+~~~
 import uproot_methods
-
 two_muons_p4 = uproot_methods.TLorentzVectorArray.from_ptetaphim(two_muons_table['Muon_pt'],
                                                                  two_muons_table['Muon_eta'],
                                                                  two_muons_table['Muon_phi'],
                                                                  two_muons_table['Muon_mass'])
-
-
-two_muons_p4
 ~~~
 {: .language-python}
 
+Let's take a look at it:
+
+~~~
+two_muons_p4
+~~~
+{: .language-python}
 ~~~
 <JaggedArrayMethods [[TLorentzVector(10.764, 1.0668, -0.034273, 0.10566) TLorentzVector(15.737, -0.56379, 2.5426, 0.10566)] [TLorentzVector(10.538, -0.42778, -0.27479, 0.10566) TLorentzVector(16.327, 0.34923, 2.5398, 0.10566)] [TLorentzVector(57.607, -0.53209, -0.071798, 0.10566) TLorentzVector(53.045, -1.0042, 3.0895, 0.10566)] ... [TLorentzVector(9.5837, -1.5126, -0.22681, 0.10566) TLorentzVector(3.3317, 2.1995, -2.7097, 0.10566)] [TLorentzVector(46.362, -1.9284, -2.3773, 0.10566) TLorentzVector(43.904, -2.2734, 0.86049, 0.10566)] [TLorentzVector(3.3099, 1.6359, 0.87988, 0.10566) TLorentzVector(15.68, 0.47661, -1.7525, 0.10566)]] at 0x7f180ddc0400>
 ~~~
 {: .output}
+
+It's indeed a jagged array of `TLorentzVector`s, representing the muon four-vectors.
+We can get the components back out with these properties:
 
 ~~~
 two_muons_p4.pt
@@ -42,55 +59,105 @@ two_muons_p4.eta
 two_muons_p4.phi
 two_muons_p4.E
 two_muons_p4.mass
+~~~
+{: .language-python}
 
+What we want is the invariant mass of the two muons in each of these events.
+To do that, we need the sum of their four-vectors.
+First, we pick out the first muon in each event with 2D slice:
+
+~~~
 first_muon_p4 = two_muons_p4[:, 0]
-first_muon_p4
+~~~
+{: .language-python}
 
+In the notation `[:, 0]`, `:` means "include every row in the first dimension" (i.e., all events in the array).
+The comma separates the selection along the first dimension from the selection along the second dimension.
+The second dimension is the muons in each event, so we want the first, or the one at the `0` index.
+Then we do the same to get the second muon in each event, just changing the `0` index to `1`:
+
+~~~
 second_muon_p4 = two_muons_p4[:, 1]
-second_muon_p4
+~~~
+{: .language-python}
 
-first_muon_p4.delta_r(second_muon_p4)
+> ## DeltaR
+>
+> Another useful feature of these four-vector arrays is being able to compute deltaR (sqrt(deltaEta^2 + deltaPhi^2)):
+>
+> ~~~
+> first_muon_p4.delta_r(second_muon_p4)
+> ~~~
+> {: .language-python}
+>
+> ~~~
+> plt.hist(first_muon_p4.delta_r(second_muon_p4), bins=100)
+> plt.xlabel('$\Delta R$ between muons')
+> plt.ylabel('Number of two-muon events')
+> plt.show()
+> ~~~
+> {: .language-python}
+>
+> ![dimuon_delta_r.png]({{ page.root }}/fig/dimuon_delta_r.png)
+>
+> In principle, we could use this to clean up our invariant mass distribution, but we'll skip that for simplicity.
 
-plt.hist(first_muon_p4.delta_r(second_muon_p4), bins=100)
-plt.xlabel('$\Delta R$ between muons')
-plt.ylabel('Number of two-muon events')
-plt.show()
+Adding the four-vectors of the first muon and the second muon for all events is really as easy as:
 
+~~~
 sum_p4 = first_muon_p4 + second_muon_p4
 sum_p4
-
-opposite_sign_muons_mask = two_muons_table['Muon_charge'][:, 0] != two_muons_table['Muon_charge'][:, 1]
-
-opposite_sign_muons_table = two_muons_table[opposite_sign_muons_mask]
-
-
-opposite_sign_muons_p4 = uproot_methods.TLorentzVectorArray.from_ptetaphim(opposite_sign_muons_table['Muon_pt'],
-                                                                           opposite_sign_muons_table['Muon_eta'],
-                                                                           opposite_sign_muons_table['Muon_phi'],
-                                                                           opposite_sign_muons_table['Muon_mass'])
-
-dimuon_p4 = opposite_sign_muons_p4[:, 0] + opposite_sign_muons_p4[:, 1]
-
-plt.hist(dimuon_p4.mass, bins=np.logspace(np.log10(0.1), np.log10(1000), 200))
-plt.xlabel('Dimuon invariant mass [GeV]')
-plt.ylabel('Number of dimuon events')
-plt.xscale('log')
-plt.yscale('log')
-plt.show()
-~~~
-{: .language-python}
-
-![dimuon_invariant_mass_hist_1.png]({{ page.root }}/fig/dimuon_invariant_mass_hist_1.png)
-
-![dimuon_invariant_mass_hist_2_labeled.png]({{ page.root }}/fig/dimuon_invariant_mass_hist_2_labeled.png)
-
-~~~
-len(dimuon_p4)
 ~~~
 {: .language-python}
 ~~~
-37183
+<TLorentzVectorArray [TLorentzVector(-2.2396, 8.5034, 4.439, 35.797) TLorentzVector(-3.3155, 6.3838, 1.1715, 28.851) TLorentzVector(4.4851, -1.3713, -94.799, 148.07) ... TLorentzVector(6.3125, -3.5496, -5.8515, 38.016) TLorentzVector(-4.838, 1.2011, -367.02, 378.28) TLorentzVector(-0.72416, -12.872, 15.934, 26.316)] at 0x7f889fbef7f0>
 ~~~
 {: .output}
+
+This is a 1D array of the four-vector sum for each event.
+
+The last thing we need to do before we're ready to plot the spectrum is to select only pairs with opposite charges:
+
+~~~
+opposite_sign_muons_mask = two_muons_table['Muon_charge'][:, 0] != two_muons_table['Muon_charge'][:, 1]
+~~~
+{: .language-python}
+
+We apply this selection to four-vector sums to get the dimuon four-vectors:
+~~~
+dimuon_p4 = sum_p4[opposite_sign_muons_mask]
+~~~
+{: .language-python}
+
+> ## Exercise
+>
+> Plot a histogram of the dimuon invariant mass on a log-log plot.
+> Try to find all resonances (there are at least 7 visible).
+> How many dimuon events are there?
+>
+> > plt.hist(dimuon_p4.mass, bins=np.logspace(np.log10(0.1), np.log10(1000), 200))
+> > plt.xlabel('Dimuon invariant mass [GeV]')
+> > plt.ylabel('Number of dimuon events')
+> > plt.xscale('log')
+> > plt.yscale('log')
+> > plt.show()
+> > ~~~
+> > {: .language-python}
+> >
+> > ![dimuon_invariant_mass_hist_1.png]({{ page.root }}/fig/dimuon_invariant_mass_hist_1.png)
+> >
+> > Labeled resonances:
+> >
+> > ![dimuon_invariant_mass_hist_2_labeled.png]({{ page.root }}/fig/dimuon_invariant_mass_hist_2_labeled.png)
+> >
+> > ~~~
+> > len(dimuon_p4)
+> > ~~~
+> > {: .language-python}
+> > ~~~
+> > 37183
+> > ~~~
+> > {: .output}
+{: .solution}
 
 {% include links.md %}
