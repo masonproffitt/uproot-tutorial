@@ -307,7 +307,7 @@ This mask is `True` for muons which are the only muon in their event *or* which 
 # Comparing histograms
 
 Now we can use these operations to compare distributions for different selections.
-Let's look at the pT of single-event muons separated by whether or not abs(eta) < 2.
+Let's look at the pT of single-event muons split into two groups by whether or not abs(eta) < 2.
 All we have to do is provide a list of arrays as the first argument to `hist` rather than just one array.
 Note the square brackets around the two arrays:
 
@@ -366,7 +366,6 @@ Now we can clearly see there's a significantly higher fraction of muons with abs
 This makes geometric sense, since muons at higher abs(eta) are traveling in a direction less perpendicular to the beam.
 
 (This name of the `density` parameter refers to the idea of interpreting the histogram as a probability density function, which always has an integral of 1.)
-
 
 > ## Columnar vs. row-based analysis
 >
