@@ -7,10 +7,17 @@ questions:
 - "What are its advantages over row-based analysis?"
 - "How do I perform selections and operations on columns?"
 objectives:
-- "First objective. (FIXME)"
+- ""
 keypoints:
-- "First key point. (FIXME)"
+- ""
 ---
+
+uproot is designed for columnar analysis, which means performing operations on entire columns (branches) at a time, rather than operating on every event individually.
+
+# Counting
+
+The simplest task we need for analysis is counting (i.e., cutflow).
+To count the total number of events, we can use the Python built-in function `len()` on any of the following:
 
 ~~~
 len(tree)
@@ -24,16 +31,32 @@ len(branches['Muon_pt']) # or any of the other branches...
 ~~~
 {: .output}
 
-Note that this is *not* the total number of muons!
+So there are 100,000 events.
 
-~~~
-len(branches['Muon_pt'].flatten())
-~~~
-{: .language-python}
-~~~
-235286
-~~~
-{: .output}
+> ## Exercise
+>
+> Note that this is *not* the total number of muons, despite running `len()` on a branch that has a number for every single muon (`Muon_pt`)!
+> Why is this?
+> Can you write some code that *does* give the total number of muons in the file?
+>
+> > ## Solution
+> >
+> > `len()` only looks at the length along the first dimension of the array.
+> > `Muon_pt` is a 2D array.
+> > In order to count every muon individually, we need to flatten the array to 1D.
+> >
+> > ~~~
+> > len(branches['Muon_pt'].flatten())
+> > ~~~
+> > {: .language-python}
+> > ~~~
+> > 235286
+> > ~~~
+> > {: .output}
+> {: .solution}
+{: .challenge}
+
+# Selections
 
 ~~~
 single_muon_mask = branches['nMuon'] == 1
