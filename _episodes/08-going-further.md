@@ -11,6 +11,12 @@ keypoints:
 - "Python and many Python packages have a huge userbase and are well supported by documentation, tutorials, and the community."
 ---
 
+# Caveat
+
+One important note that I did not address at all: The methods that I showed here work great for operating on one small-ish file (smaller than your system's RAM) at a time.
+uproot has specialized methods and options that are better when running on many data files or larger files.
+This is one of many topics covered in the uproot documentation below.
+
 # Python in HEP
 
  - [Tutorial by Jim Pivarski, creator of uproot](https://github.com/jpivarski/2019-07-29-dpf-python)
