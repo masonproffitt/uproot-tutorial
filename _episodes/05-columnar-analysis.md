@@ -7,9 +7,13 @@ questions:
 - "What are its advantages over row-based analysis?"
 - "How do I perform selections and operations on columns?"
 objectives:
-- ""
+- "Count items passing some selection criteria."
+- "Apply selection criteria to get passing events/objects."
+- "Plot different selections for comparison."
 keypoints:
-- "Avoid for loops whenever possible in analysis (especially in Python)."
+- "Selections are created by comparisons on arrays and are represented by masks (arrays of Boolean values)."
+- "Selections are applied by acting like a mask is an array index."
+- "Avoid `for` loops whenever possible in analysis (especially in Python)."
 ---
 
 uproot is designed for columnar analysis, which means performing operations on entire columns (branches) at a time, rather than operating on every event individually.
@@ -371,7 +375,7 @@ This makes geometric sense, since muons at higher abs(eta) are traveling in a di
 >
 > As an aside about columnar analysis, take a look at this comparison of speed for counting muons with abs(eta) < 2.
 >
-> The first example is a row-based approach, using for loops over every event and every muon in the event:
+> The first example is a row-based approach, using `for` loops over every event and every muon in the event:
 >
 > ~~~
 > %%time
