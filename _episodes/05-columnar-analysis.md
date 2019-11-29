@@ -343,7 +343,7 @@ plt.show()
 `label` is a list of strings passed to `hist`, corresponding to the arrays (in the same order),
 and we have to add `plt.legend()` in order to actually draw a legend with those labels.
 
-Another problem is that these histograms are on different scales because there are relatively few single-muon events.
+Another problem is that these histograms are on different scales because there are fewer large eta muons.
 Often we want to compare only the shapes of the distribution, so we normalize the integral of each to 1.
 We can achieve this by adding `density=True` to the `hist()` call:
 
