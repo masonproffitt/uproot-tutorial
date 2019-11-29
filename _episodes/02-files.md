@@ -24,8 +24,7 @@ Our first goal is just to get to the data within uproot, so we need to open the 
 
 # Opening a file
 
-The first thing you must do whenever you want to use `uproot` is to import it,
-just like any other Python module:
+The first thing you must do whenever you want to use `uproot` is import it, just like any other Python module:
 
 ~~~
 import uproot
@@ -45,7 +44,7 @@ import uproot
 > 
 > then this means `uproot` hasn't been installed properly.
 > Check the [Setup]({{ page.root }}/setup.html) page for detailed instructions.
-> If you're using conda (like Anaconda or Miniconda),
+> If you're using `conda` (like Anaconda or Miniconda),
 > make sure you've activated the same environment where you installed `uproot`.
 {: .callout}
 
@@ -99,12 +98,16 @@ The output contains pairs of the form `(name, type)`.
 Therefore the key "Events" refers to a TTree object.
 This is where all the data in this file is stored.
 
-> ## Why the `b`?
+> ## Why the `b` and `;1`?
 >
 > You may be wondering why there's a `b` before the string containing the item name, like in `b'Events'`.
 > This is actually a `bytes` object (a different fundamental Python type) rather than a string.
 > uproot uses the `bytes` type because the ROOT file format doesn't specify what type of character encoding should be used (e.g., UTF-8).
 > It's a bit annoying, but it was designed this way so that it works equally well with non-English characters in any encoding.
+>
+> You may also wonder why there's a `;1` after "Events".
+> This notation refers to the *cycle number*, which is a detail of the ROOT file format that we don't need to care about about.
+> This `;1` shows up if you open the file in ROOT itself as well.
 {: .callout}
 
 # Accessing contents
