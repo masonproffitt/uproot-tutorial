@@ -137,6 +137,9 @@ dimuon_p4 = sum_p4[opposite_sign_muons_mask]
 > Try to find all resonances (there are at least 7 visible).
 > How many dimuon events are there?
 >
+> > ## Solution
+> >
+> > ~~~
 > > plt.hist(dimuon_p4.mass, bins=np.logspace(np.log10(0.1), np.log10(1000), 200))
 > > plt.xlabel('Dimuon invariant mass [GeV]')
 > > plt.ylabel('Number of dimuon events')
