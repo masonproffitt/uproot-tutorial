@@ -5,19 +5,27 @@ exercises: 0
 questions:
 - "How can I fit a common function to a histogram?"
 objectives:
-- ""
+- "Fit a distribution to the Z peak."
 keypoints:
-- ""
+- "There are many packages for fitting, and this just one very simple example."
 ---
 
-![dimuon_invariant_mass_fit_1]({{ page.root }}/fig/dimuon_invariant_mass_fit_1.png)
+I want to zoom in on the Z resonance:
 
 ~~~
 plt.hist(dimuon_p4.mass, bins=40, range=(70, 110))
 plt.xlabel('Dimuon invariant mass [GeV]')
 plt.ylabel('Number of dimuon events / 1 MeV')
 plt.show()
+~~~
+{: .language-python}
 
+![dimuon_invariant_mass_fit_1]({{ page.root }}/fig/dimuon_invariant_mass_fit_1.png)
+
+Resonances are described by the relativistic Breit-Wigner distribution.
+We should be able to fit this peak to one:
+
+~~~
 from scipy.optimize import curve_fit
 
 def relativistic_breit_wigner(x, resonance_mass, width, normalization):
@@ -38,7 +46,19 @@ plt.show()
 ~~~
 {: .language-python}
 
-
 ![dimuon_invariant_mass_fit_2]({{ page.root }}/fig/dimuon_invariant_mass_fit_2.png)
+
+The peak position is stored in popt[0]:
+
+~~~
+popt[0]
+~~~
+{: .language-python}
+~~~
+90.77220936326736
+~~~
+{: .output}
+
+Pretty close to the real mass, 91.1876 GeV.
 
 {% include links.md %}
