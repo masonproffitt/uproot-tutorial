@@ -106,7 +106,7 @@ This is where all the data in this file is stored.
 > It's a bit annoying, but it was designed this way so that it works equally well with non-English characters in any encoding.
 >
 > You may also wonder why there's a `;1` after "Events".
-> This notation refers to the *cycle number*, which is a detail of the ROOT file format that we don't need to care about about.
+> This notation refers to the *cycle number*, which is a detail of the ROOT file format that we don't need to care about.
 > This `;1` shows up if you open the file in ROOT itself as well.
 {: .callout}
 
