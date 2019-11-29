@@ -1,7 +1,7 @@
 ---
 title: "Columnar Analysis"
-teaching: 0
-exercises: 0
+teaching: 25
+exercises: 5
 questions:
 - "What is columnar analysis?"
 - "What are its advantages over row-based analysis?"
