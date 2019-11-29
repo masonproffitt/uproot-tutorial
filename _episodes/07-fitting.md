@@ -1,5 +1,5 @@
 ---
-title: "Fitting"
+title: "Advanced topic: Fitting (optional)"
 teaching: 0
 exercises: 0
 questions:
