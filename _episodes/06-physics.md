@@ -163,6 +163,6 @@ dimuon_p4 = sum_p4[opposite_sign_muons_mask]
 > > 37183
 > > ~~~
 > > {: .output}
-{: .solution}
+{: .challenge}
 
 {% include links.md %}
