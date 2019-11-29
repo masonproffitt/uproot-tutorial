@@ -353,7 +353,7 @@ We can achieve this by adding `density=True` to the `hist()` call:
 
 ~~~
 plt.hist([branches['Muon_pt'][single_muon_mask & eta_mask].flatten(),
-          branches['Muon_pt'][single_muon_mask & ~eta_mask].flatten()),
+          branches['Muon_pt'][single_muon_mask & ~eta_mask].flatten()],
          label=['$|\eta| < 2$', '$|\eta| \geq 2$'],
          bins=25, range=(0, 50), density=True)
 plt.title('Normalized')
