@@ -1,15 +1,20 @@
 ---
 title: "Trees, Branches, and Events"
-teaching: 0
-exercises: 0
+teaching: 15
+exercises: 5
 questions:
 - "How do I access a TTree?"
 - "How can I tell what branches are in a TTree?"
 - "How do I read the data from a TTree?"
 objectives:
-- "First objective. (FIXME)"
+- "List the branches in a tree."
+- "Access the branches in a tree."
+- "Create a table from tree branches."
+- "Access data for a particular event."
 keypoints:
-- "First key point. (FIXME)"
+- "TTrees are tables of data."
+- "Trees are made of branches, which are columns in the table."
+- "Each row represents an event."
 ---
 
 # Trees
