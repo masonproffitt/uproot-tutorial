@@ -1,6 +1,6 @@
 ---
 title: "Trees, Branches, and Events"
-teaching: 15
+teaching: 20
 exercises: 5
 questions:
 - "How do I access a TTree?"

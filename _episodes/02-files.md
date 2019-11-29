@@ -1,6 +1,6 @@
 ---
 title: "Opening files"
-teaching: 10
+teaching: 20
 exercises: 0
 questions:
  - "How do I open a ROOT file with uproot?"

@@ -1,6 +1,6 @@
 ---
 title: "Histograms"
-teaching: 15
+teaching: 20
 exercises: 5
 questions:
  - "How do I make a histogram in Python (without ROOT)?"
