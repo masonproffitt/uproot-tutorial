@@ -23,7 +23,7 @@ plt.show()
 ![dimuon_invariant_mass_fit_1]({{ page.root }}/fig/dimuon_invariant_mass_fit_1.png)
 
 Resonances are described by the relativistic Breit-Wigner distribution.
-We should be able to fit this peak to one:
+We should be able to fit one to this peak:
 
 ~~~
 from scipy.optimize import curve_fit
