@@ -1,13 +1,14 @@
 ---
 title: "Getting Physics-Relevant Information"
-teaching: 0
+teaching: 20
 exercises: 10
 questions:
 - "How can I use columnar analysis to do something useful for physics?"
 objectives:
-- ""
+- "Find dimuon invariant mass resonances."
 keypoints:
-- ""
+- "uproot-methods has several useful classes, like `TLorentzVector`s and jagged arrays of them."
+- "uproot can be used to do real physics analyses"
 ---
 
 Okay, we're finally ready to look for resonances in dimuon events.
@@ -83,7 +84,7 @@ second_muon_p4 = two_muons_p4[:, 1]
 
 > ## DeltaR
 >
-> Another useful feature of these four-vector arrays is being able to compute deltaR (sqrt(deltaEta^2 + deltaPhi^2)):
+> Another useful feature of these four-vector arrays is being able to compute deltaR (= sqrt(deltaEta^2 + deltaPhi^2)):
 >
 > ~~~
 > first_muon_p4.delta_r(second_muon_p4)
@@ -101,6 +102,7 @@ second_muon_p4 = two_muons_p4[:, 1]
 > ![dimuon_delta_r.png]({{ page.root }}/fig/dimuon_delta_r.png)
 >
 > In principle, we could use this to clean up our invariant mass distribution, but we'll skip that for simplicity.
+{: .callout}
 
 Adding the four-vectors of the first muon and the second muon for all events is really as easy as:
 
@@ -123,7 +125,7 @@ opposite_sign_muons_mask = two_muons_table['Muon_charge'][:, 0] != two_muons_tab
 ~~~
 {: .language-python}
 
-We apply this selection to four-vector sums to get the dimuon four-vectors:
+We apply this selection to the four-vector sums to get the dimuon four-vectors:
 ~~~
 dimuon_p4 = sum_p4[opposite_sign_muons_mask]
 ~~~
