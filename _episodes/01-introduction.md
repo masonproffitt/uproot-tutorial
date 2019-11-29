@@ -1,15 +1,16 @@
 ---
 title: "Introduction"
-teaching: 5
+teaching: 10
 exercises: 0
 questions:
-- "Why Python?"
-- "What is uproot?"
-- "Why should I use it?"
+ - "Why Python?"
+ - "What is uproot?"
+ - "Why should I use it?"
 objectives:
-- "Explain some advantages of Python and uproot."
+ - "Explain some advantages of Python and uproot."
 keypoints:
-- "uproot is a fast and lightweight Python package for reading and writing ROOT files."
+ - "uproot is a fast and lightweight Python package for reading and writing ROOT files."
+ - "uproot is designed to work efficiently with jagged arrays of data."
 ---
 
 # Python and HEP

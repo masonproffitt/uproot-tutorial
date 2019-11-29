@@ -1,15 +1,28 @@
 ---
 title: "Opening files"
-teaching: 0
+teaching: 10
 exercises: 0
 questions:
-- "How do I open a ROOT file with uproot?"
-- "How can I tell what's in the file?"
+ - "How do I open a ROOT file with uproot?"
+ - "How can I tell what's in the file?"
+ - "How do I access the contents?"
 objectives:
-- "First objective. (FIXME)"
+ - "Open a ROOT file and list its contents."
+ - "Access objects within a ROOT file."
 keypoints:
-- "First key point. (FIXME)"
+ - "Opening and navigating files in uproot isn't that different from doing so in ROOT."
+ - "Use `.keys()` to see the contents of a file."
+ - "Use the form `file['key']` to access an object inside a file."
 ---
+
+# Example motivation
+
+In order to learn how to use uproot, we'll try to do a very short and simple analysis to look for resonances in a dimuon events.
+The example ROOT file is from real CMS data during proton-proton collisions in 2012.
+Make sure you've downloaded it from the [Setup]({{ page.root }}/setup.html) page and put it in your working directory.
+Our first goal is just to get to the data within uproot, so we need to open the file and navigate to the muon information.
+
+# Opening a file
 
 The first thing you must do whenever you want to use `uproot` is to import it,
 just like any other Python module:
@@ -19,18 +32,22 @@ import uproot
 ~~~
 {: .language-python}
 
-If you get something like:
-
-~~~
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-ModuleNotFoundError: No module named 'uproot'
-~~~
-{: .output}
-
-then this means `uproot` hasn't been installed properly.
-If you're using conda (like Anaconda or Miniconda),
-make sure you've activated the same environment where you installed `uproot`.
+> ## Import errors?
+>
+> If you get something like:
+> 
+> ~~~
+> Traceback (most recent call last):
+>   File "<stdin>", line 1, in <module>
+> ModuleNotFoundError: No module named 'uproot'
+> ~~~
+> {: .output}
+> 
+> then this means `uproot` hasn't been installed properly.
+> Check the [Setup]({{ page.root }}/setup.html) page for detailed instructions.
+> If you're using conda (like Anaconda or Miniconda),
+> make sure you've activated the same environment where you installed `uproot`.
+{: .callout}
 
 Now open the ROOT file and assign it to variable (which I've named `file` here):
 
@@ -50,7 +67,11 @@ file
 ~~~
 {: .output}
 
-Just like any other kind of directory, you can list the contents (of the file):
+# File contents
+
+Just like any other kind of directory, you can list the contents (of the file).
+The name of each item in the file is called a "key".
+
 ~~~
 file.keys()
 ~~~
@@ -59,6 +80,11 @@ file.keys()
 [b'Events;1']
 ~~~
 {: .output}
+
+We can see that there is one key: "Events".
+This doesn't tell us what kind of object it refers to, though.
+ROOT files can contain many different types of objects, including subdirectories.
+The following function provides a way to inspect the types of each item:
 
 ~~~
 file.classnames()
@@ -69,14 +95,22 @@ file.classnames()
 ~~~
 {: .output}
 
-~~~
-file.get('Events')
-~~~
-{: .language-python}
-~~~
-<TTree b'Events' at 0x(hexadecimal number)>
-~~~
-{: .output}
+The output contains pairs of the form `(name, type)`.
+Therefore the key "Events" refers to a TTree object.
+This is where all the data in this file is stored.
+
+> ## Why the `b`?
+>
+> You may be wondering why there's a `b` before the string containing the item name, like in `b'Events'`.
+> This is actually a `bytes` object (a different fundamental Python type) rather than a string.
+> uproot uses the `bytes` type because the ROOT file format doesn't specify what type of character encoding should be used (e.g., UTF-8).
+> It's a bit annoying, but it was designed this way so that it works equally well with non-English characters in any encoding.
+{: .callout}
+
+# Accessing contents
+
+Now we want to actually access the object inside the file.
+You can do this just as you would to get an item in an array:
 
 ~~~
 file['Events']
@@ -86,5 +120,7 @@ file['Events']
 <TTree b'Events' at 0x(hexadecimal number)>
 ~~~
 {: .output}
+
+This expression refers to the actual TTree object, which we will look at next.
 
 {% include links.md %}
