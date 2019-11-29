@@ -1,7 +1,7 @@
 ---
 title: "Histograms"
-teaching: 0
-exercises: 0
+teaching: 15
+exercises: 5
 questions:
  - "How do I make a histogram in Python (without ROOT)?"
  - "How can I change histogram settings?"
@@ -147,6 +147,8 @@ plt.show()
 {: .language-python}
 
 ![Muon_pt_hist_1]({{ page.root }}/fig/Muon_pt_hist_1.png)
+
+Note that you can use LaTeX in matplotlib labels (as I did above).
 
 # Logarithmic scales
 
