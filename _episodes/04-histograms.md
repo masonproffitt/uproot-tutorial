@@ -3,12 +3,15 @@ title: "Histograms"
 teaching: 0
 exercises: 0
 questions:
-- "How do I make a histogram in Python (without ROOT)?"
-- "How can I change histogram settings?"
+ - "How do I make a histogram in Python (without ROOT)?"
+ - "How can I change histogram settings?"
 objectives:
-- ""
+ - "Create a histogram of an array (regular or jagged)."
+ - "Make a histogram's axes logarithmic."
 keypoints:
-- ""
+ - "Use the `bins` and/or `range` parameters to improve histogram binning."
+ - "Make sure your axes are labeled."
+ - "Jagged arrays must be flattened before histogramming."
 ---
 
 # Histogramming basics
