@@ -2,7 +2,7 @@
 title: Setup
 ---
 
-This tutorial requires Jupyter, Python, uproot (of course), matplotlib, and scipy (for the optional fitting section).
+This tutorial requires Jupyter, Python 3, uproot (of course), matplotlib, and scipy (for the optional fitting section).
 
 # Getting uproot and Jupyter
 
@@ -25,7 +25,7 @@ If you haven't done so before, you'll need to run `pip install --user uproot` in
 ## Anaconda (local installation)
 
 The easiest way to run everything locally is through [Anaconda](https://www.anaconda.com/distribution/).
-Download it and follow the instructions. 
+Download the Python 3 version and follow the instructions.
 Once you're in the Anaconda environment, create a new environment with uproot installed by running
 `conda create -n uproot uproot`
 and then activate that environment by running
