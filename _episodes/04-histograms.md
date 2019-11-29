@@ -203,7 +203,7 @@ Don't remove the `np.log10` part, though.
 > > plt.show()
 > > ~~~
 > >
-> > ![Muon_eta_hist_1]({{ page.root }}/fig/Muon_eta_hist_1.png)
+> > ![Muon_eta_hist_0]({{ page.root }}/fig/Muon_eta_hist_0.png)
 > {: .solution}
 {: .challenge}
 
