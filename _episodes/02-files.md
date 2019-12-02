@@ -24,7 +24,7 @@ Our first goal is just to get to the data within uproot, so we need to open the 
 
 # Opening a file
 
-The first thing you must do whenever you want to use `uproot` is import it, just like any other Python module:
+The first thing you must do whenever you want to use uproot is import it, just like any other Python module:
 
 ~~~
 import uproot
@@ -42,10 +42,10 @@ import uproot
 > ~~~
 > {: .output}
 > 
-> then this means `uproot` hasn't been installed properly.
+> then this means uproot hasn't been installed properly.
 > Check the [Setup]({{ page.root }}/setup.html) page for detailed instructions.
 > If you're using `conda` (like Anaconda or Miniconda),
-> make sure you've activated the same environment where you installed `uproot`.
+> make sure you've activated the same environment where you installed uproot.
 {: .callout}
 
 Now open the ROOT file and assign it to variable (which I've named `file` here):
