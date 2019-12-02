@@ -111,7 +111,7 @@ branches = tree.arrays(namedecode='utf-8')
 > `KeyError` means that Python is complaining that 'nMuon' is not a key in `tree`.
 > But we know that 'nMuon' is the name of one of the branches.
 > The problem is Python sees that the string 'nMuon' is not of the same type as the `bytes` object `b'nMuon'` (even though the data bits of the two are identical), and this makes it treat the two as unequal.
-> If we *didn't* include `namedecode='utf-8' in `arrays()`, then we would always have to write the `b`, like this:
+> If we *didn't* include `namedecode='utf-8'` in `arrays()`, then we would always have to write the `b`, like this:
 >
 >~~~
 >tree.arrays()[b'nMuon']
