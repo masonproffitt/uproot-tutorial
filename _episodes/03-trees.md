@@ -159,9 +159,9 @@ It's abbreviated with an ellipsis (`...`) so that it doesn't take up the whole p
 > ~~~
 > <class 'numpy.ndarray'>
 > ~~~
+> {: .output}
 >
 > The `dtype=uint32` means that the **d**ata**type** of each array entry is a 32-bit unsigned integer.
-> {: .output}
 {: .callout}
 
 The rest of the branches are all a special uproot type:
