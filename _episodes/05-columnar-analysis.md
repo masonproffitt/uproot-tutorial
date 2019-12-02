@@ -297,9 +297,6 @@ This mask is `True` for muons which are the only muon in their event *or* which 
 > ~~~
 > {: .output}
 >
-> This traces back to an oversight way back from the days when the C language was being created.
-> The weird precedence rule is still in modern languages for consistency.
->
 > What this means is that parentheses are necessary for expressions like this to have the correct meaning:
 >
 > ~~~
