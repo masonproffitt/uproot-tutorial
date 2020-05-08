@@ -162,7 +162,7 @@ Neat!
 
 ## Selections from a jagged array
 
-Let's look at a comparion for a jagged array, using the absolute value of muon eta:
+Let's look at a comparison for a jagged array, using the absolute value of muon eta:
 
 ~~~
 eta_mask = abs(branches['Muon_eta']) < 2
