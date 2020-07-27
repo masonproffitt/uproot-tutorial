@@ -35,7 +35,6 @@ def relativistic_breit_wigner(x, resonance_mass, width, normalization):
 
 bin_contents, bin_edges = np.histogram(dimuon_p4.mass, bins=20, range=(80, 100))
 bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2.0
-
 popt, pcov = curve_fit(relativistic_breit_wigner, bin_centers, bin_contents, p0=[90, 10, 1000], sigma=np.sqrt(bin_contents))
 
 plt.hist(dimuon_p4.mass, bins=40, range=(70, 110), label='Data')
