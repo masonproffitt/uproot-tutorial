@@ -298,7 +298,7 @@ It's a bit more work and not so obvious how to get all of the information out:
 
 ~~~
 for column_name in table[0]:
-    print(column_name, '=', first_event[column_name])
+    print(column_name, '=', table[0][column_name])
 ~~~
 {: .language-python}
 ~~~
