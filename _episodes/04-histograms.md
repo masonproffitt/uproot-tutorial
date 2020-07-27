@@ -67,7 +67,7 @@ You can't really understand much about the distribution because the binning and 
 These settings are controlled by the `bins` and `range` parameters:
 
 ~~~
-plt.hist((branches['nMuon'], bins=10, range=(0, 10))
+plt.hist(branches['nMuon'], bins=10, range=(0, 10))
 plt.show()
 ~~~
 {: .language-python}
