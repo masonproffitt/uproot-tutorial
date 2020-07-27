@@ -147,8 +147,8 @@ For example, let's plot the muon pT for only the single-muon events:
 
 ~~~
 plt.hist(branches['Muon_pt'][single_muon_mask].flatten(), bins=100, range=(0, 100))
-plt.xlabel('Muon $p_{\mathrm{T}}$ [MeV]')
-plt.ylabel('Number of single muons / 1 MeV')
+plt.xlabel('Muon $p_{\mathrm{T}}$ [GeV]')
+plt.ylabel('Number of single muons / 1 GeV')
 plt.yscale('log')
 plt.show()
 ~~~
