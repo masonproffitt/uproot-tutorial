@@ -1,9 +1,9 @@
 # uproot tutorial
 
-[![Create a Slack Account with us](https://img.shields.io/badge/Create_Slack_Account-The_Carpentries-071159.svg)](https://swc-slack-invite.herokuapp.com/)
-
 This is a tutorial on [uproot](https://github.com/scikit-hep/uproot), a package for reading and writing ROOT files for columnar analysis.
 It uses Software Carpentry's lesson template and was originally used for the [Software Carpentry Workshop at CERN](https://indico.cern.ch/event/834411/) on November 29, 2019.
+
+This repository builds a webpage that is live [here](https://hsf-training.github.io/hsf-training-uproot-webpage/)!
 
 ## Contributing
 
