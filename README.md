@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hsf-training/hsf-training-uproot-webpage.svg?branch=gh-pages)](https://travis-ci.org/hsf-training/hsf-training-uproot-webpage)
+
 # uproot tutorial
 
 This is a tutorial on [uproot](https://github.com/scikit-hep/uproot), a package for reading and writing ROOT files for columnar analysis.
