@@ -10,6 +10,6 @@ a Python package that can read and write files in the `.root` format without act
 (as opposed to PyROOT, which is just an interface in Python that runs ROOT behind the scenes).
 
 
-It was written by [Mason Proffitt][https://github.com/masonproffitt/] and first taught during the [Software Carpentry Workshop at CERN](https://indico.cern.ch/event/834411/) on November 29, 2019.
+It was written by [Mason Proffitt](https://github.com/masonproffitt/) and first taught during the [Software Carpentry Workshop at CERN](https://indico.cern.ch/event/834411/) on November 29, 2019.
 
 {% include links.md %}
