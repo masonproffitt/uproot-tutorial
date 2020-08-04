@@ -7,7 +7,7 @@ It was written by [Mason Proffitt][mason] using the [Software Carpentry's][carpe
 
 This repository builds a webpage that is live [here](https://hsf-training.github.io/hsf-training-uproot-webpage/)!
 
-The ``uproot`` tutorial is part of the [HSF training curriculum](https://hepsoftwarefoundation.org/training/curriculum).
+The uproot tutorial is part of the [HSF training curriculum](https://hepsoftwarefoundation.org/training/curriculum).
 
 ## Contributing
 
