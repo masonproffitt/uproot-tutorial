@@ -12,4 +12,6 @@ a Python package that can read and write files in the `.root` format without act
 
 It was written by [Mason Proffitt](https://github.com/masonproffitt/) and first taught during the [Software Carpentry Workshop at CERN](https://indico.cern.ch/event/834411/) on November 29, 2019.
 
+{% include curriculum.html %}
+
 {% include links.md %}
