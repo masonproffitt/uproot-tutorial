@@ -48,7 +48,7 @@ import uproot
 > make sure you've activated the same environment where you installed uproot.
 {: .callout}
 
-Now open the ROOT file and assign it to variable (which I've named `file` here):
+Now open the ROOT file and assign it to a variable (which I've named `file` here):
 
 ~~~
 file = uproot.open('uproot-tutorial-file.root')
