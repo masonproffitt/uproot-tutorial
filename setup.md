@@ -18,7 +18,7 @@ It should open up Jupyter with all necessary packages and files installed.
 ## SWAN
 
 You must have a CERN account for this option.
-Go to [swan.cern.ch]().
+Go to <swan.cern.ch>.
 For the "software stack" in the configuration settings, just make sure it has "Python 3" in the name.
 If you haven't done so before, you'll need to run `pip install --user uproot` in a Jupyter notebook and then restart the kernel (Kernel->Restart).
 
