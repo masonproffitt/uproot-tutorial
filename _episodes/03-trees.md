@@ -69,6 +69,7 @@ branches = tree.arrays()
 
 Next let's just look at each branch individually.
 You can access a single branch from `branches` in a similar way to getting an item from a ROOT file object (array-like notation):
+
 ~~~
 branches['nMuon']
 ~~~
@@ -80,6 +81,21 @@ branches['nMuon']
 
 You can see the partial list of numbers in the output that represents the number of muons in each event.
 It's abbreviated with an ellipsis (`...`) so that it doesn't take up the whole page.
+
+> ## Error?
+>
+> If you get something like:
+>
+> ~~~
+> Traceback (most recent call last):
+>   File "<stdin>", line 1, in <module>
+> KeyError: 'nMuon'
+> ~~~
+> {: .output}
+>
+> then you are almost certainly using an older version of Uproot that is not compatible with the rest of this tutorial.
+> If this is the case, install the latest version of Uproot, restart the notebook's kernel, and try again.
+{: .callout}
 
 These `Array` objects are a special type provided by the Awkward Array package.
 The `type=100000 * uint32` means that there are 100,000 entries and that each entry is a 32-bit unsigned integer. Each entry corresponds to one event.
