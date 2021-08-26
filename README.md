@@ -1,13 +1,13 @@
 [![Build Status](https://travis-ci.org/hsf-training/hsf-training-uproot-webpage.svg?branch=gh-pages)](https://travis-ci.org/hsf-training/hsf-training-uproot-webpage)
 
-# uproot tutorial
+# Uproot tutorial
 
-This is a tutorial on [uproot](https://github.com/scikit-hep/uproot), a package for reading and writing ROOT files for columnar analysis.
+This is a tutorial on [Uproot](https://github.com/scikit-hep/uproot), a package for reading and writing ROOT files for columnar analysis.
 It was written by [Mason Proffitt][mason] using the [Software Carpentry's][carpentries] lesson template and first taught during the [Software Carpentry Workshop at CERN](https://indico.cern.ch/event/834411/) on November 29, 2019.
 
 This repository builds a webpage that is live [here](https://hsf-training.github.io/hsf-training-uproot-webpage/)!
 
-The uproot tutorial is part of the [HSF training curriculum](https://hepsoftwarefoundation.org/training/curriculum).
+The Uproot tutorial is part of the [HSF training curriculum](https://hepsoftwarefoundation.org/training/curriculum).
 
 ## Contributing
 

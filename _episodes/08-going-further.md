@@ -14,35 +14,39 @@ keypoints:
 # Caveat
 
 One important note that I did not address at all: The methods that I showed here work great for operating on one small-ish file (smaller than your system's RAM) at a time.
-uproot has specialized methods and options that are better when running on many data files or larger files.
-This is one of many topics covered in the uproot documentation below.
+Uproot has specialized methods and options that are better when running on many data files or larger files.
+This is one of many topics covered in the Uproot documentation below.
 
-# Python in HEP
+# Scikit-HEP project
 
- - [Tutorial by Jim Pivarski, creator of uproot](https://github.com/jpivarski/2019-07-29-dpf-python)
-
-# Scikit-HEP
-
- - [https://github.com/scikit-hep]()
+- <https://github.com/scikit-hep>
 
 ## Uproot
 
- - [https://github.com/scikit-hep/uproot]()
- - [https://uproot.readthedocs.io]()
+- [GitHub repository](https://github.com/scikit-hep/uproot4)
+- [Official documentation](https://uproot.readthedocs.io)
 
-## Awkward-Array
+## Awkward Array
 
- - [https://github.com/scikit-hep/awkward-array]()
+- [GitHub repository](https://github.com/scikit-hep/awkward-1.0)
+- [Official documentation](https://awkward-array.org/)
+
+## Vector
+
+- [GitHub repository](https://github.com/scikit-hep/vector)
+- [Official documentation](https://vector.readthedocs.io)
 
 ## Other tools
 
- - [mplhep](https://github.com/scikit-hep/mplhep) (plotting utilities)
- - [pyhf](https://github.com/scikit-hep/pyhf) (histogram fitting)
+- [Hist](https://github.com/scikit-hep/hist) (creating histograms)
+- [`pyhf`](https://github.com/scikit-hep/pyhf) (histogram fitting and likelihoods)
+- [`mplhep`](https://github.com/scikit-hep/mplhep) (plotting utilities)
 
 # Standard packages
 
- - [numpy](https://numpy.org/devdocs/)
- - [matplotlib](https://matplotlib.org/contents.html)
- - [pandas](https://pandas.pydata.org/pandas-docs/stable/) (data frames)
+- [NumPy](https://numpy.org/devdocs/)
+- [Matplotlib](https://matplotlib.org/contents.html)
+- [SciPy](https://docs.scipy.org/doc/scipy/index.html)
+- [pandas](https://pandas.pydata.org/pandas-docs/stable/) (data frames)
 
 {% include links.md %}

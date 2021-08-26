@@ -38,101 +38,34 @@ tree.keys()
 ~~~
 {: .language-python}
 ~~~
-[b'nMuon', b'Muon_pt', b'Muon_eta', b'Muon_phi', b'Muon_mass', b'Muon_charge']
+['nMuon', 'Muon_pt', 'Muon_eta', 'Muon_phi', 'Muon_mass', 'Muon_charge']
 ~~~
 {: .output}
 
 The above output is a list of the branch names.
 So we can see that for each event, we will have the number of muons in the event (`nMuon`) and the pT, eta, phi, mass, and charge of each muon.
 
-But how do we get the actual data from the table? There are several ways with uproot, but the simplest is with the `arrays()` function:
+But how do we get the actual data from the table? There are several ways with Uproot, but the simplest is with the `arrays()` function:
 
 ~~~
 tree.arrays()
 ~~~
 {: .language-python}
 ~~~
-{b'nMuon': array([2, 2, 1, ..., 3, 2, 3], dtype=uint32), b'Muon_pt': <JaggedArray [[10.763697 15.736523] [10.53849 16.327097] [3.2753265] ... [6.343258 6.9803934 5.0852466] [3.3099499 15.68049] [11.444268 3.082721 4.9692106]] at 0x7f948aedab80>, b'Muon_eta': <JaggedArray [[1.0668273 -0.5637865] [-0.42778006 0.34922507] [2.2108555] ... [-0.59949154 -0.0495256 -0.9052992] [1.6359439 0.4766063] [0.44437575 -1.6943384 0.7640488]] at 0x7f948aed5d60>, b'Muon_phi': <JaggedArray [[-0.034272723 2.5426154] [-0.2747921 2.5397813] [-1.2234136] ... [-2.9530895 0.26560423 -3.1138406] [0.87988055 -1.7524908] [-0.47927496 2.2850282 0.5623152]] at 0x7f948aed5d90>, b'Muon_mass': <JaggedArray [[0.10565837 0.10565837] [0.10565837 0.10565837] [0.10565837] ... [0.10565837 0.10565837 0.10565837] [0.10565837 0.10565837] [0.10565837 0.10565837 0.10565837]] at 0x7f948aed5970>, b'Muon_charge': <JaggedArray [[-1 -1] [1 -1] [1] ... [-1 1 1] [1 -1] [1 -1 1]] at 0x7f948aed5c70>}
+<Array [{nMuon: 2, Muon_pt: [10.8, ... -1, 1]}] type='100000 * {"nMuon": uint32,...'>
 ~~~
 {: .output}
 
-You can see lots of numbers in there, which indeed are from the data in the tree.
-
-> ## What is all this?
->
-> We'll go through the structure of the data a bit later.
-> What type of object is this whole thing, though?
-> It's not explicitly stated in the output, but you may recognize it.
-> In any case, we can check with the built-in Python function `type()`:
->
-> ~~~
-> type(tree.arrays())
-> ~~~
-> {: .language-python}
-> ~~~
-> <class 'dict'>
-> ~~~
-> {: .output}
->
-> It's a `dict` (dictionary) object.
-> `dict`s are very useful, but one thing that can be problematic here is that there's no easy way to access all of the information for just a single event with a `dict` like this.
-> We'll deal with that issue later in the lesson.
-{: .callout}
+You can see some numbers in there, which indeed are from the data in the tree.
 
 # Branches
 
 Now we assign this object (which contains both the names and contents of the branches) to another variable (`branches`):
 
 ~~~
-branches = tree.arrays(namedecode='utf-8')
+branches = tree.arrays()
 ~~~
 {: .language-python}
-
-> ## Why the 'utf-8'?
->
-> I added a parameter to the `arrays()` function above, called `namedecode`, and I've set this parameter to the string `'utf-8'`.
-> This is so that, when we deal with the `branches` variable, we can ignore the `b` before the names of the branches.
-> Technically speaking, this means that all the `bytes` objects in `keys()` have been converted into normal strings by UTF-8 character decoding.
->
-> To see what this means in practice, let's try something:
->
->~~~
->tree.arrays()['nMuon']
->~~~
->{: .language-python}
->~~~
->Traceback (most recent call last):
->  File "<stdin>", line 1, in <module>
->KeyError: 'nMuon'
->~~~
->{: .output}
->
-> What?
-> `KeyError` means that Python is complaining that 'nMuon' is not a key in `tree`.
-> But we know that 'nMuon' is the name of one of the branches.
-> The problem is Python sees that the string 'nMuon' is not of the same type as the `bytes` object `b'nMuon'` (even though the data bits of the two are identical), and this makes it treat the two as unequal.
-> If we *didn't* include `namedecode='utf-8'` in `arrays()`, then we would always have to write the `b`, like this:
->
->~~~
->tree.arrays()[b'nMuon']
->~~~
->{: .language-python}
->
-> This would be really annoying, so we avoid it.
-> We can verify that the `b`s are gone in `branches` by running `keys()` on it:
->
-> ~~~
-> branches.keys()
-> ~~~
-> {: .language-python}
-> ~~~
-> dict_keys(['nMuon', 'Muon_pt', 'Muon_eta', 'Muon_phi', 'Muon_mass', 'Muon_charge'])
-> ~~~
-> {: .output}
->
-> You can ignore `dict_keys`, it has no effect here.
-> Now (thankfully) we won't see any `bytes` objects again in this tutorial.
-{: .callout}
 
 Next let's just look at each branch individually.
 You can access a single branch from `branches` in a similar way to getting an item from a ROOT file object (array-like notation):
@@ -141,53 +74,30 @@ branches['nMuon']
 ~~~
 {: .language-python}
 ~~~
-array([2, 2, 1, ..., 3, 2, 3], dtype=uint32)
+<Array [2, 2, 1, 4, 4, 3, ... 0, 3, 2, 3, 2, 3] type='100000 * uint32'>
 ~~~
 {: .output}
 
 You can see the partial list of numbers in the output that represents the number of muons in each event.
 It's abbreviated with an ellipsis (`...`) so that it doesn't take up the whole page.
 
-> ## More detail on the branch object
->
-> The output says `array`, but the actual type of the branch is an `ndarray`, which is just a numpy array:
->
-> ~~~
-> type(branches['nMuon'])
-> ~~~
-> {: .language-python}
-> ~~~
-> <class 'numpy.ndarray'>
-> ~~~
-> {: .output}
->
-> The `dtype=uint32` means that the **d**ata**type** of each array entry is a 32-bit unsigned integer.
-{: .callout}
+These `Array` objects are a special type provided by the Awkward Array package.
+The `type=100000 * uint32` means that there are 100,000 entries and that each entry is a 32-bit unsigned integer. Each entry corresponds to one event.
 
-The rest of the branches are all a special uproot type:
+Let's look at another branch:
 
 ~~~
 type(branches['Muon_pt'])
 ~~~
 {: .language-python}
 ~~~
-<class 'awkward.array.jagged.JaggedArray'>
+<Array [[10.8, 15.7], ... 11.4, 3.08, 4.97]] type='100000 * var * float32'>
 ~~~
 {: .output}
 
-This must be a *jagged array* because the number of entries is different for different events (because each event can have a different number of muons).
-We can still look at the content in the same way, though:
-
-~~~
-branches['Muon_pt']
-~~~
-{: .language-python}
-~~~
-<JaggedArray [[10.763697 15.736523] [10.53849 16.327097] [3.2753265] ... [6.343258 6.9803934 5.0852466] [3.3099499 15.68049] [11.444268 3.082721 4.9692106]] at 0x(hexadecimal number)>
-~~~
-{: .output}
-
+This is a *jagged array* because the number of entries is different for different events (because each event can have a different number of muons).
 Note that there are square brackets `[]` surrounding the list of entries for each event.
+The `type='100000 * var * float32'` means that there are 100,000 rows, each containing a **var**iable number of 32-bit floating point numbers.
 This is basically an array of arrays (or a 2D array).
 
 ## Events
@@ -199,7 +109,7 @@ branches['Muon_pt'][0]
 ~~~
 {: .language-python}
 ~~~
-array([10.763697, 15.736523], dtype=float32)
+<Array [10.8, 15.7] type='2 * float32'>
 ~~~
 {: .output}
 
@@ -212,7 +122,7 @@ branches['Muon_pt'][2]
 ~~~
 {: .language-python}
 ~~~
-array([3.2753265], dtype=float32)
+<Array [3.28] type='1 * float32'>
 ~~~
 {: .output}
 
@@ -234,84 +144,60 @@ It only has one muon.
 > > ~~~
 > > {: .language-python}
 > > ~~~
-> > [10.763697 15.736523]
-> > [10.53849  16.327097]
-> > [3.2753265]
-> > [11.429154  17.634033   9.624728   3.5022252]
-> > [ 3.2834418  3.6440058 32.911224  23.721754 ]
-> > [3.566528 4.572504 4.371863]
-> > [57.6067  53.04508]
-> > [11.319675 23.906353]
-> > [10.193569 14.204061]
-> > [11.470704   3.4690065]
+> > [10.8, 15.7]
+> > [10.5, 16.3]
+> > [3.28]
+> > [11.4, 17.6, 9.62, 3.5]
+> > [3.28, 3.64, 32.9, 23.7]
+> > [3.57, 4.57, 4.37]
+> > [57.6, 53]
+> > [11.3, 23.9]
+> > [10.2, 14.2]
+> > [11.5, 3.47]
 > > ~~~
 > > {: .output}
 > {: .solution}
 {: .challenge}
 
-Earlier I mentioned that the `branches` object that we have is not convenient for getting information from all branches at once for one particular event.
-That is, it would be nice if we could do something like
+What if we want to get all of the information about a single event?
+So far we've accessed data in `branches` by providing a branch name, but we can also just use an event index:
+
 ~~~
 branches[0]
 ~~~
 {: .language-python}
-
-and get all muon information about the first event.
-However, the above command results in an error.
-We can get this kind of functionality, but we have to move to a slightly different type of object--a `Table`.
-`Table` is a class in the `awkward` package that uproot uses internally to handle jagged arrays.
-We can import `awkward` and then create a `Table` from our `branches` object:
-
 ~~~
-import awkward
-table = awkward.Table(branches)
-~~~
-{: .language-python}
-
-Let's try again, now with `table`:
-
-~~~
-table[0]
-~~~
-{: .language-python}
-~~~
-<Row 0>
+<Record ... 0.106], Muon_charge: [-1, -1]} type='{"nMuon": uint32, "Muon_pt": va...'>
 ~~~
 {: .output}
 
-Well, there's no error, so that's good.
-The return type is `Row`, which is another class from `awkward`.
-Unfortunately, the output representation of a `Row` is not helpful at all for understanding what's in it.
-We can access the information inside by selecting out an individual column (branch):
+This is a `Record` object, which is another special type provided by Awkward Array.
+It functions basically the same way as a standard Python dictionary (`dict`).
+Unfortunately, most of the interesting information is still hidden in the above output to save space.
+A little trick we can use to force printing all the data is adding `.tolist()`:
 
 ~~~
-table[0]['nMuon']
+branches[0].tolist()
 ~~~
 {: .language-python}
 ~~~
-2
+{'nMuon': 2,
+ 'Muon_pt': [10.763696670532227, 15.736522674560547],
+ 'Muon_eta': [1.0668272972106934, -0.563786506652832],
+ 'Muon_phi': [-0.03427272289991379, 2.5426154136657715],
+ 'Muon_mass': [0.10565836727619171, 0.10565836727619171],
+ 'Muon_charge': [-1, -1]}
 ~~~
 {: .output}
 
-This is the number of muons in the first event, as we've already seen.
-It's a bit more work and not so obvious how to get all of the information out:
+There we go. Now we can see the whole picture for an individual event.
 
-~~~
-for column_name in table[0]:
-    print(column_name, '=', table[0][column_name])
-~~~
-{: .language-python}
-~~~
-nMuon = 2
-Muon_pt = [10.763697 15.736523]
-Muon_eta = [ 1.0668273 -0.5637865]
-Muon_phi = [-0.03427272  2.5426154 ]
-Muon_mass = [0.10565837 0.10565837]
-Muon_charge = [-1 -1]
-
-~~~
-{: .output}
-
-There we go. Now we finally see the whole picture for an individual event.
+> `.tolist()` is a NumPy function that has been extended to Awkward Array objects.
+> As the name suggests, it converts NumPy arrays to Python lists.
+> In the case of trees, which have named branches, it actually converts to a dictionary of lists.
+> It can be very useful when you want to understand exactly what's in an `Array` or `Record`.
+> Be careful when using it, though--trying to print out an entire branch or tree could cause Python to crash if it's large enough.
+> Therefore it's best to only use `tolist()` on one or a few events at a time to be safe.
+{: .callout}
 
 {% include links.md %}

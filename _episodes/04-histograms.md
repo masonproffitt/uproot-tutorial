@@ -18,7 +18,7 @@ keypoints:
 
 Histograms are the most important type of plots for particle physics.
 We'll need to know how to make them with the tools we have.
-matplotlib is the standard and most popular plotting package for Python, and it is quite powerful, so we'll use it.
+Matplotlib is the standard and most popular plotting package for Python, and it is quite powerful, so we'll use it.
 First we import it:
 
 ~~~
@@ -28,7 +28,7 @@ import matplotlib.pyplot as plt
 
 (It's customary to import it abbreviated as `plt` as above, which saves some typing.)
 
-The histogram function in matplotlib is `hist()`.
+The histogram function in Matplotlib is `hist()`.
 We can see what it does by just passing it our `nMuon` branch:
 
 ~~~
@@ -49,7 +49,7 @@ plt.hist(branches['nMuon'])
 >
 > `hist()` actually returns all the bin contents and bin edges in case you want to do something with them after creating the plot.
 > We don't need these return values, and they clutter up the notebook, so we should get rid of them.
-> There are a few ways to do this, but I think the best practice is to add `plt.show()`, which is a way to tell matplotlib when your plot is all set up and ready to be displayed.
+> There are a few ways to do this, but I think the best practice is to add `plt.show()`, which is a way to tell Matplotlib when your plot is all set up and ready to be displayed.
 > As a consequence of `hist()` not being the last line in the notebook cell, the bin values will no longer be printed.
 > For example:
 >
@@ -79,10 +79,17 @@ plt.show()
 > ## Binning and range tips
 >
 > Getting the binning and range right for a histogram is somewhat of an art, but I often find it helpful to know the mean, standard deviation, minimum, and maximum of the original distribution.
-> The following functions calculate these for an array:
+>
+> First, import NumPy via:
+> ~~~
+> import numpy as np
+> ~~~
+> {: .language-python}
+>
+> Then the following functions calculate these values for an array:
 >
 > ~~~
-> branches['nMuon'].mean()
+> np.mean(branches['nMuon'])
 > ~~~
 > {: .language-python}
 > ~~~
@@ -91,7 +98,7 @@ plt.show()
 > {: .output}
 >
 > ~~~
-> branches['nMuon'].std()
+> np.std(branches['nMuon'])
 > ~~~
 > {: .language-python}
 > ~~~
@@ -100,7 +107,7 @@ plt.show()
 > {: .output}
 >
 > ~~~
-> branches['nMuon'].min()
+> np.min(branches['nMuon'])
 > ~~~
 > {: .language-python}
 > ~~~
@@ -109,7 +116,7 @@ plt.show()
 > {: .output}
 >
 > ~~~
-> branches['nMuon'].max()
+> np.max(branches['nMuon'])
 > ~~~
 > {: .language-python}
 > ~~~
@@ -135,11 +142,18 @@ plt.show()
 # Histogramming a jagged array
 
 We can make histograms of the other branches as well, but there's one more step necessary because of their jaggedness.
-matplotlib expects a series of data to be in a 1D array, so we need to convert or *flatten* the jagged 2D array into a 1D array.
-This is as easy as adding `.flatten()` to the branch's array:
+Matplotlib expects a series of data to be in a 1D array, so we need to convert or *flatten* the jagged 2D array into a 1D array.
+In order to do this, we need to import Awkward Array:
 
 ~~~
-plt.hist(branches['Muon_pt'].flatten(), bins=100, range=(0, 100))
+import awkward as ak
+~~~
+{: .language-python}
+
+Then use `ak.flatten()` on the branch's array:
+
+~~~
+plt.hist(ak.flatten(branches['Muon_pt']), bins=100, range=(0, 100))
 plt.xlabel('Muon $p_{\mathrm{T}}$ [GeV]')
 plt.ylabel('Number of muons / 1 GeV')
 plt.show()
@@ -148,7 +162,7 @@ plt.show()
 
 ![Muon_pt_hist_1]({{ page.root }}/fig/Muon_pt_hist_1.png)
 
-Note that you can use LaTeX in matplotlib labels (as I did above).
+Note that you can use LaTeX in Matplotlib labels (as I did above).
 
 # Logarithmic scales
 
@@ -168,7 +182,7 @@ plt.show()
 
 As you might guess, `plt.xscale('log')` will make the *x-axis* scale logarithmic.
 The issue is that this doesn't make the bin sizes logarithmic, so the plot will end up looking quite strange in most cases.
-The solution to this is to use a numpy function called `logspace` to calculate logarithmic bin edges:
+The solution to this is to use a NumPy function called `logspace` to calculate logarithmic bin edges:
 
 ~~~
 import numpy as np
@@ -183,7 +197,7 @@ plt.show()
 ![Muon_pt_hist_3]({{ page.root }}/fig/Muon_pt_hist_3.png)
 
 In the above example, `bins` is being set to an array.
-If matplotlib sees that `bins` is an array, it will use the values of the array to set the bin edges rather than try to evenly space them across `range`.
+If Matplotlib sees that `bins` is an array, it will use the values of the array to set the bin edges rather than try to evenly space them across `range`.
 Don't worry too much if this seems confusing; the details of how this works isn't important for this lesson.
 The important part is that, inside the `logspace()` call, you can modify the numbers to change where the bins start and end and how many bins there are.
 Don't remove the `np.log10` part, though.
