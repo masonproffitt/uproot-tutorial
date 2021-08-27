@@ -208,6 +208,8 @@ branches[0].tolist()
 
 There we go. Now we can see the whole picture for an individual event.
 
+> ## `.tolist()`
+>
 > `.tolist()` is a NumPy function that has been extended to Awkward Array objects.
 > As the name suggests, it converts NumPy arrays to Python lists.
 > In the case of trees, which have named branches, it actually converts to a dictionary of lists.
