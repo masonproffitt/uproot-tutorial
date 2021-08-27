@@ -103,7 +103,7 @@ The `type=100000 * uint32` means that there are 100,000 entries and that each en
 Let's look at another branch:
 
 ~~~
-type(branches['Muon_pt'])
+branches['Muon_pt']
 ~~~
 {: .language-python}
 ~~~
