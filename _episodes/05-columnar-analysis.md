@@ -185,7 +185,7 @@ There's one Boolean value for each muon, corresponding to whether its eta is les
 We can do counting and plotting just as before:
 
 ~~~
-np.sum(eta_mask.flatten)
+np.sum(eta_mask)
 ~~~
 {: .language-python}
 ~~~

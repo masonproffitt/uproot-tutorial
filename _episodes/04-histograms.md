@@ -170,7 +170,7 @@ Another important thing to know is how to set axes to a logarithmic scale.
 For the y-axis, this is as simple as adding a line with `plt.yscale('log')`:
 
 ~~~
-plt.hist(branches['Muon_pt'].flatten(), bins=100, range=(0, 100))
+plt.hist(ak.flatten(branches['Muon_pt']), bins=100, range=(0, 100))
 plt.xlabel('Muon $p_{\mathrm{T}}$ [GeV]')
 plt.ylabel('Number of muons / 1 GeV')
 plt.yscale('log')
@@ -186,7 +186,7 @@ The solution to this is to use a NumPy function called `logspace` to calculate l
 
 ~~~
 import numpy as np
-plt.hist(branches['Muon_pt'].flatten(), bins=np.logspace(np.log10(1), np.log10(100), 100))
+plt.hist(ak.flatten(branches['Muon_pt']), bins=np.logspace(np.log10(1), np.log10(100), 100))
 plt.xlabel('Muon $p_{\mathrm{T}}$ [GeV]')
 plt.xscale('log')
 plt.ylabel('Number of muons')
@@ -211,7 +211,7 @@ Don't remove the `np.log10` part, though.
 > > Your plot might look a bit different, but it's fine as long as the binning is reasonable such that you can see the same distribution features.
 > >
 > > ~~~
-> > plt.hist(branches['Muon_eta'].flatten(), bins=50, range=(-2.5, 2.5))
+> > plt.hist(ak.flatten(branches['Muon_eta']), bins=50, range=(-2.5, 2.5))
 > > plt.xlabel('Muon $\eta$')
 > > plt.ylabel('Number of muons')
 > > plt.show()
