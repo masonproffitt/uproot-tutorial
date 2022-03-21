@@ -16,7 +16,7 @@ keypoints:
 - "Avoid `for` loops whenever possible in analysis (especially in Python)."
 ---
 
-uproot is designed for columnar analysis, which means performing operations on entire columns (branches) at a time, rather than operating on every event individually.
+Uproot is designed for columnar analysis, which means performing operations on entire columns (branches) at a time, rather than operating on every event individually.
 
 # Counting
 
@@ -24,8 +24,7 @@ The simplest task we need for analysis is counting (i.e., cutflow).
 To count the total number of events, we can use the Python built-in function `len()` on any of the following:
 
 ~~~
-len(tree)
-len(table)
+len(branches)
 len(branches['nMuon'])
 len(branches['Muon_pt']) # or any of the other branches...
 ~~~
@@ -50,7 +49,7 @@ So there are 100,000 events.
 > > In order to count every muon individually, we need to flatten the array to 1D.
 > >
 > > ~~~
-> > len(branches['Muon_pt'].flatten())
+> > len(ak.flatten(branches['Muon_pt']))
 > > ~~~
 > > {: .language-python}
 > > ~~~
@@ -73,13 +72,13 @@ branches['nMuon'] == 1
 ~~~
 {: .language-python}
 ~~~
-array([False, False,  True, ..., False, False, False])
+<Array [False, False, True, ... False, False] type='100000 * bool'>
 ~~~
 {: .output}
 
 This is checking for equality between an array and the number `1`.
 Of course these are different types (array vs. scalar), so the Python objects are certainly not identical, but you can see the return value is not just `False`.
-For numpy arrays and jagged arrays, what happens is that each element in the array is compared to the scalar value, and the return value is a new array (of the same shape) filled with all these comparison results.
+What happens is that each element in the array is compared to the scalar value, and the return value is a new array (of the same shape) filled with all these comparison results.
 So we can interpret the output as the result of testing whether each event has exactly one muon or not.
 The first two events do not, the third does, and so on.
 
@@ -101,7 +100,7 @@ We need the number of `True`s in the array.
 There are multiple ways to do this, but my favorite is:
 
 ~~~
-single_muon_mask.sum()
+np.sum(single_muon_mask)
 ~~~
 {: .language-python}
 ~~~
@@ -123,7 +122,7 @@ branches['Muon_pt'][single_muon_mask]
 ~~~
 {: .language-python}
 ~~~
-<JaggedArray [[3.2753265] [3.837803] [16.145521] ... [8.18912] [13.272973] [9.484549]] at 0x(hexadecimal number)>
+<Array [[3.28], [3.84], ... [13.3], [9.48]] type='13447 * var * float32'>
 ~~~
 {: .output}
 
@@ -146,7 +145,7 @@ We can also use masks to plot quantities after some selection.
 For example, let's plot the muon pT for only the single-muon events:
 
 ~~~
-plt.hist(branches['Muon_pt'][single_muon_mask].flatten(), bins=100, range=(0, 100))
+plt.hist(ak.flatten(branches['Muon_pt'][single_muon_mask]), bins=100, range=(0, 100))
 plt.xlabel('Muon $p_{\mathrm{T}}$ [GeV]')
 plt.ylabel('Number of single muons / 1 GeV')
 plt.yscale('log')
@@ -174,7 +173,7 @@ eta_mask
 ~~~
 {: .language-python}
 ~~~
-<JaggedArray [[True True] [True True] [False] ... [True True True] [True True] [True True True]] at 0x(hexadecimal number)>
+<Array [[True, True], ... True, True, True]] type='100000 * var * bool'>
 ~~~
 {: .output}
 
@@ -183,10 +182,10 @@ There's one Boolean value for each muon, corresponding to whether its eta is les
 
 ### Counting
 
-We can do counting and plotting like before--we just have to remember to flatten the array:
+We can do counting and plotting just as before:
 
 ~~~
-eta_mask.flatten().sum()
+np.sum(eta_mask)
 ~~~
 {: .language-python}
 ~~~
@@ -201,13 +200,13 @@ This is the number of muons that pass the eta cut.
 Let's plot both the original eta distribution and the one after the cut to verify its effect:
 
 ~~~
-plt.hist(branches['Muon_eta'].flatten(), bins=50, range=(-2.5, 2.5))
+plt.hist(ak.flatten(branches['Muon_eta']), bins=50, range=(-2.5, 2.5))
 plt.title('No selection')
 plt.xlabel('Muon $\eta$')
 plt.ylabel('Number of muons')
 plt.show()
 
-plt.hist(branches['Muon_eta'][eta_mask].flatten(), bins=50, range=(-2.5, 2.5))
+plt.hist(ak.flatten(branches['Muon_eta'][eta_mask]), bins=50, range=(-2.5, 2.5))
 plt.title('With $|\eta| < 2$ selection')
 plt.xlabel('Muon $\eta$')
 plt.ylabel('Number of muons')
@@ -230,7 +229,7 @@ We can invert selections with `~` (the NOT operator):
 ~~~
 {: .language-python}
 ~~~
-array([ True,  True, False, ...,  True,  True,  True])
+<Array [True, True, False, ... True, True] type='100000 * bool'>
 ~~~
 {: .output}
 
@@ -243,7 +242,7 @@ single_muon_mask & eta_mask
 ~~~
 {: .language-python}
 ~~~
-<JaggedArray [[False False] [False False] [False] ... [False False False] [False False] [False False False]] at 0x(hexadecimal number)>
+<Array [[False, False], ... False, False]] type='100000 * var * bool'>
 ~~~
 {: .output}
 
@@ -256,7 +255,7 @@ single_muon_mask | eta_mask
 ~~~
 {: .language-python}
 ~~~
-<JaggedArray [[False True] [True True] [True] ... [True True True] [False True] [True False True]] at 0x(hexadecimal number)>
+<Array [[True, True], ... True, True, True]] type='100000 * var * bool'>
 ~~~
 {: .output}
 
@@ -313,8 +312,8 @@ All we have to do is provide a list of arrays as the first argument to `hist` ra
 Note the square brackets around the two arrays:
 
 ~~~
-plt.hist([branches['Muon_pt'][single_muon_mask & eta_mask].flatten(),
-          branches['Muon_pt'][single_muon_mask & ~eta_mask].flatten()],
+plt.hist([ak.flatten(branches['Muon_pt'][single_muon_mask & eta_mask]),
+          ak.flatten(branches['Muon_pt'][single_muon_mask & ~eta_mask])],
          bins=25, range=(0, 50))
 plt.xlabel('Muon $p_{\mathrm{T}}$ [GeV]')
 plt.ylabel('Number of single muons / 2 GeV')
@@ -328,8 +327,8 @@ Ah, but it doesn't actually say which histogram is which.
 For that, we need to add labels and a legend:
 
 ~~~
-plt.hist([branches['Muon_pt'][single_muon_mask & eta_mask].flatten(),
-          branches['Muon_pt'][single_muon_mask & ~eta_mask].flatten()],
+plt.hist([ak.flatten(branches['Muon_pt'][single_muon_mask & eta_mask]),
+          ak.flatten(branches['Muon_pt'][single_muon_mask & ~eta_mask])],
          label=['$|\eta| < 2$', '$|\eta| \geq 2$'],
          bins=25, range=(0, 50))
 plt.xlabel('Muon $p_{\mathrm{T}}$ [GeV]')
@@ -349,8 +348,8 @@ Often we want to compare only the shapes of the distribution, so we normalize th
 We can achieve this by adding `density=True` to the `hist()` call:
 
 ~~~
-plt.hist([branches['Muon_pt'][single_muon_mask & eta_mask].flatten(),
-          branches['Muon_pt'][single_muon_mask & ~eta_mask].flatten()],
+plt.hist([ak.flatten(branches['Muon_pt'][single_muon_mask & eta_mask]),
+          ak.flatten(branches['Muon_pt'][single_muon_mask & ~eta_mask])],
          label=['$|\eta| < 2$', '$|\eta| \geq 2$'],
          bins=25, range=(0, 50), density=True)
 plt.title('Normalized')
@@ -388,8 +387,8 @@ This makes geometric sense, since muons at higher abs(eta) are traveling in a di
 > ~~~
 > {: .language-python}
 > ~~~
-> CPU times: user 1.33 s, sys: 16.5 ms, total: 1.34 s
-> Wall time: 1.34 s
+> CPU times: user 4.78 s, sys: 77.2 ms, total: 4.86 s
+> Wall time: 4.88 s
 >
 > 204564
 > ~~~
@@ -400,18 +399,18 @@ This makes geometric sense, since muons at higher abs(eta) are traveling in a di
 > ~~~
 > %%time
 >
-> (abs(branches['Muon_eta']) < 2).flatten().sum()
+> np.sum(abs(branches['Muon_eta']) < 2)
 > ~~~
 > {: .language-python}
 > ~~~
-> CPU times: user 10.7 ms, sys: 2.91 ms, total: 13.6 ms
-> Wall time: 12.1 ms
+> CPU times: user 5.18 ms, sys: 1 ms, total: 6.18 ms
+> Wall time: 4.87 ms
 >
 > 204564
 > ~~~
 > {: .output}
 >
-> The columnar approach here is more than a factor of 10 faster.
+> The columnar approach here is about 1000 times faster.
 >
 {: .callout}
 
